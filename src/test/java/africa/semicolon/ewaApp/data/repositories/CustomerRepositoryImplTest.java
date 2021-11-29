@@ -59,7 +59,6 @@ class CustomerRepositoryImplTest {
     void findAll() {
         Customer savedCustomer = saveCustomer();
         customerRepository.save(savedCustomer);
-        customerRepository.save(savedCustomer);
-        assertEquals(3,customerRepository.findAll().size());
+        assertEquals(1,customerRepository.findAll().size());
     }
 }
