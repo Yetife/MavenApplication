@@ -10,13 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class CustomerController {
     private CustomerService customerService = new CustomerServiceImpl();
 
+
     @PostMapping("/api/customer")
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<?> register(@RequestBody CustomerRequest customerRequest) {
 //        return customerService.register(customerRequest);
         try{
@@ -28,9 +31,16 @@ public class CustomerController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000/")
     @GetMapping("/api/customer/{id}")
     public Optional<Customer> getCustomerById(@PathVariable("id") String email) {
         return customerService.findCustomerByEmail(email);
+
+    }
+
+    @GetMapping("/api/customers")
+    public List<Customer> findAllCustomer() {
+        return customerService.getCustomer();
 
     }
 }
